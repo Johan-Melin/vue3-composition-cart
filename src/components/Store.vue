@@ -1,29 +1,19 @@
 <template>
     <div>
-        <h1>Store</h1>
-        <div>Loading: {{loading}}</div>
-        <button @click="search">load products</button>
+        <h1>Items in cart: {{ productsInCart.length }}</h1>
+        <div v-for="product in productsInCart" :key="product">{{product.name}}</div>
     </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import useCart from '../utils/useCart'
 
 export default {
     setup() {
-        const loading = ref(false)
-        const products = ref([])
-
-        async function search () {
-            loading.value = true
-            products.value = [{name: "icecream"}]
-            loading.value = false
-        }
+        const { productsInCart } = useCart()
         
         return {
-            loading: computed(() => loading.value),
-            products: computed(() => products.value),
-            search
+            productsInCart
         }
     }
 }
