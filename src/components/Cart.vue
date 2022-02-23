@@ -4,8 +4,8 @@
         <div v-for="product in productsInCart" :key="product">
             <span>{{product.name}}</span>
             <span> #{{product.amount}}</span>
-            <button>+</button>
-            <button>-</button>
+            <button @click="addProduct(product)">+</button>
+            <button @click="removeProduct(product)">-</button>
         </div>
     </div>
 </template>
@@ -16,9 +16,12 @@ import useCart from '../utils/useCart'
 export default {
     setup() {
         const { productsInCart } = useCart()
+        const { addProduct, removeProduct } = useCart()
         
         return {
-            productsInCart
+            productsInCart,
+            addProduct,
+            removeProduct
         }
     }
 }

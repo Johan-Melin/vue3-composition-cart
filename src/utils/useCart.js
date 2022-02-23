@@ -6,12 +6,20 @@ const productsInCart = ref([
 
 export default function useCart() {
     function addProduct(product) {
-        productsInCart.value.push({...product, amount: 1})
-        console.log(productsInCart.value)
+        if(productsInCart.value.some(item => item.id === product.id)){
+            console.log('Product already in cart')
+        }else{
+            productsInCart.value.push({...product, amount: 1})
+        }
+    }
+
+    function removeProduct(product) {
+        productsInCart.value = productsInCart.value.filter(item => item.id !== product.id)
     }
     
     return {
         productsInCart: computed(() => productsInCart.value),
-        addProduct
+        addProduct,
+        removeProduct
     }
 }
