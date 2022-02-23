@@ -1,16 +1,19 @@
 <template>
   <div class="home">
     <Store />
+    <Cart />
   </div>
 </template>
 
 <script>
 import Store from './components/Store.vue'
+import Cart from './components/Cart.vue'
 
 export default {
   name: 'App',
   components: {
-    Store
+    Store,
+    Cart
   },
 }
 </script>

@@ -1,7 +1,11 @@
 <template>
     <div>
-        <h1>Items in cart: {{ productsInCart.length }}</h1>
-        <div v-for="product in productsInCart" :key="product">{{product.name}}</div>
+        <h1>Store</h1>
+        <div v-for="product in products" :key="product.id">
+            <span>{{product.name}}</span>
+            <span>{{product.price}}</span>
+            <button @click="addProduct(product)">+</button>
+        </div>
     </div>
 </template>
 
@@ -10,15 +14,17 @@ import useCart from '../utils/useCart'
 
 export default {
     setup() {
-        const { productsInCart } = useCart()
+        const products = [
+            { id: 1, name: 'Banana', price: 20 },
+            { id: 2, name: 'Apple', price: 30 },
+            { id: 3, name: 'Pear', price: 40 },
+        ]
+        const { addProduct } = useCart()
         
         return {
-            productsInCart
+            products,
+            addProduct
         }
     }
 }
 </script>
-
-<style>
-
-</style>

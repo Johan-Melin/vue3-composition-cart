@@ -1,12 +1,17 @@
 import { ref, computed } from 'vue';
 
-export default function useProduct() {
-    const productsInCart = ref([
-        {name: "icecream"},
-        {name: "coca-cola"},
-    ])
+const productsInCart = ref([
+    {id: 1, name: 'Banana', price: 20, amount: 1},
+])
+
+export default function useCart() {
+    function addProduct(product) {
+        productsInCart.value.push({...product, amount: 1})
+        console.log(productsInCart.value)
+    }
     
     return {
         productsInCart: computed(() => productsInCart.value),
+        addProduct
     }
 }
