@@ -6,10 +6,21 @@ const productsInCart = ref([
 
 export default function useCart() {
     function addProduct(product) {
-        if(productsInCart.value.some(item => item.id === product.id)){
-            console.log('Product already in cart')
+        const found = productsInCart.value.find(x => x.id === product.id)
+        if(found){
+            found.amount++;
         }else{
             productsInCart.value.push({...product, amount: 1})
+        }
+    }
+
+    function subtractProduct(product) {
+        const found = productsInCart.value.find(x => x.id === product.id)
+        if(found){
+            found.amount--;
+            if(found.amount <= 0){
+                removeProduct(product)
+            }
         }
     }
 
@@ -20,6 +31,7 @@ export default function useCart() {
     return {
         productsInCart: computed(() => productsInCart.value),
         addProduct,
+        subtractProduct,
         removeProduct
     }
 }
