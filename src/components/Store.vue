@@ -19,10 +19,11 @@ export default {
             { id: 2, name: 'Apple', price: 30 },
             { id: 3, name: 'Pear', price: 40 },
         ]
-        const { addProduct } = useCart()
+        const { addToQueue, addProduct } = useCart()
         
         return {
             products,
+            addToQueue,
             addProduct
         }
     }

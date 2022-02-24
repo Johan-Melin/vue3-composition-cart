@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Items in cart: {{ productsInCart.length }}</h1>
+        <h1>Items in cart: {{ productsInCart.reduce((prev, curr) => prev + curr.amount, 0) }}</h1>
         <div v-for="product in productsInCart" :key="product">
             <button @click="removeProduct(product)">remove</button>
             <span>{{product.name}}</span>

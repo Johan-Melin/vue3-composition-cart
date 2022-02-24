@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 const productsInCart = ref([
     {id: 1, name: 'Banana', price: 20, amount: 1},
 ])
+const queuedProducts = ref([])
 
 export default function useCart() {
     function addProduct(product) {
@@ -12,6 +13,15 @@ export default function useCart() {
         }else{
             productsInCart.value.push({...product, amount: 1})
         }
+    }
+
+    function addToQueue(product) {
+        queuedProducts.value.push(product);
+    }
+
+    function addProducts() {
+        queuedProducts.value.map(product => addProduct(product));
+        queuedProducts.value = [];
     }
 
     function subtractProduct(product) {
@@ -30,7 +40,10 @@ export default function useCart() {
     
     return {
         productsInCart: computed(() => productsInCart.value),
+        queuedProducts,
         addProduct,
+        addProducts,
+        addToQueue,
         subtractProduct,
         removeProduct
     }
